@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Blueprint Index Page
+{% endblock %}
+
+{% block content_title %}
+Posts
+{% endblock %}
+
+{% block content %}
+
+{% for p in pages.items %}
+<!-- was for p in post-->
+<div class="card mb-4">
+    {% if p.image %}
+    <img class="card-img-top" src="{{ url_for('static', filename='img') }}/{{ p.image }}" alt="Card image cap">
+    {% else %}
+    <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+    {% endif %}
+  <div class="card-body">
+
+    <h2 class="card-title">
+      {{ p.title }}
+      <!-- <a href="{{ url_for('posts.post_detail', slug=p.slug) }}">{{ p.title }}</a> -->
+    </h2>
+
+    <p class="card-text">
+      {{ p.body }}
+    </p>
+    <a href="{{ url_for('posts.post_detail', slug=p.slug) }}" class="btn btn-primary">Read More &rarr;</a>
+  </div>
+
+  <div class="card-footer text-muted">
+    Posted on {{ p.created.strftime('%Y-%m-%d') }}, by
+    <a href="#">FlaskApp</a>
+  </div>
+</div>
+{% endfor %}
+
+<nav aria-label="...">
+  <ul class="pagination">
+
+    <li {% if not pages.has_prev%} class="page-item disabled" {% endif %}>
+
+      <a class="page-link" href="./?page={{ pages.prev_num }}" tabindex="-1" aria-disabled="true">Previous</a>
+    </li>
+    {% for page in pages.iter_pages() %}
+
+    <li {% if page == pages.page %} class="page-item active" aria-current="page" {% endif %}>
+      <a class="page-link" href="./?page={{ page }}">{{ page }}<span class="sr-only">(current)</span></a>
+    </li>
+
+    {% endfor %}
+
+    <li {% if not pages.has_next %} class="page-item disabled" {% endif %}>
+      <a class="page-link" href="./?page={{ pages.next_num }}">Next</a>
+    </li>
+  </ul>
+</nav>
+{% endblock %}
