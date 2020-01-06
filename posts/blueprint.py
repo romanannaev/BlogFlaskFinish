@@ -12,6 +12,7 @@ from flask_security import login_required
 import secrets
 import os
 from flask import current_app
+from sqlalchemy import func
 
 posts = Blueprint('posts', __name__, template_folder='templates') # realization functionality of app posts
 
@@ -66,7 +67,8 @@ def index():
         page = 1
 
     if q:
-        post = Post.query.filter(Post.title.contains(q) | Post.body.contains(q)) #.all()
+        post = Post.query.filter(func.lower(Post.title).contains(q.lower(), autoescape=True) | \
+            func.lower(Post.body).contains(q.lower(), autoescape=True)) #.all() func.lower(Post.title) == func.lower(q)
     else:
         post = Post.query.order_by(Post.created.desc())  #method disc() orders lists of posts down
 
