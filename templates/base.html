@@ -82,7 +82,7 @@
                   <input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.args.get('q', '') }}">
                 </div>
 
-                <button type="submit" class="btn btn-secondary" type="button">Submit</button>                  
+                <button formaction="{{ url_for ('posts.index') }}" type="submit" class="btn btn-secondary" type="button">Submit</button>                  
               </form>
             
           </div>

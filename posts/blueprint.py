@@ -72,7 +72,7 @@ def index():
     else:
         post = Post.query.order_by(Post.created.desc())  #method disc() orders lists of posts down
 
-    pages = post.paginate(page=page, per_page=5)
+    pages = post.paginate(page=page, per_page=3)
 
     return render_template('posts/index.html', pages=pages)
 
