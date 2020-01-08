@@ -10,6 +10,7 @@
         <a href="{{ url_for('posts.tag_detail', slug=tag.slug)}}" class="badge badge-secondary">{{ tag.name }}</a>
         {% endfor %}
     </div>
+    <img class="card-img-top" src="{{ url_for('static', filename='img') }}/{{ post.image }}" alt="Card image cap">
 {% endblock %}
 
 {% block content %}
