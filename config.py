@@ -10,7 +10,6 @@ class Config(object):
     SECURITY_PASSWORD_SALT = 'salt'
     SECURITY_PASSWORD_HASH = 'sha512_crypt'
 
-
 class ProductionConfig(Config):
     DEBUG = False
 
@@ -19,11 +18,9 @@ class StagingConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
 
-
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-
 
 class TestingConfig(Config):
     TESTING = True
